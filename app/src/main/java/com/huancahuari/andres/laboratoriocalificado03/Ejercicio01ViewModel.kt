@@ -9,16 +9,13 @@ import okhttp3.*
 import java.io.IOException
 
 class Ejercicio01ViewModel : ViewModel() {
-
     val teacherList = MutableLiveData<List<TeacherResponse>>()
     val errorApi = MutableLiveData<String>()
 
     private val client = OkHttpClient()
-
     init {
         getAllTeachers()
     }
-
     fun getAllTeachers() {
         val request = Request.Builder()
             .url("https://private-effe28-tecsup1.apiary-mock.com/list/teacher")
@@ -28,7 +25,6 @@ class Ejercicio01ViewModel : ViewModel() {
             override fun onFailure(call: Call, e: IOException) {
                 errorApi.postValue("Error al cargar datos. Verificar la conexión a internet.")
             }
-
             override fun onResponse(call: Call, response: Response) {
                 if (!response.isSuccessful) {
                     errorApi.postValue("Error en la respuesta del servidor")
